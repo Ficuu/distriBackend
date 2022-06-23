@@ -24,6 +24,10 @@ app.use('/product', productRouter)
 app.use('/auth', authRoutes)
 app.use('/user', userRoutes)
 
+app.use('/', (req, res) => {
+    res.render('Welcome to the server')
+})
+
 app.listen(3001, () => {
     console.log(`Server listen in port 3001`)
 })
