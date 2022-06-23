@@ -3,6 +3,7 @@ import conn  from'./database.js'
 import morgan from 'morgan'
 import cors from 'cors'
 
+
 conn()
 
 import { createRoles } from './libs/initialSetup' 
@@ -16,6 +17,7 @@ const app = express()
 
 createRoles()
 
+app.set('port', process.env.PORT || 3001)
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(cors())
@@ -25,9 +27,9 @@ app.use('/auth', authRoutes)
 app.use('/user', userRoutes)
 
 app.use('/', (req, res) => {
-    res.render('Welcome to the server')
+    res.send('Welcome to the server')
 })
 
-app.listen(3001, () => {
-    console.log(`Server listen in port 3001`)
+app.listen(app.get('port'), () => {
+    console.log(`Server listen in port ${app.get('port')}`)
 })
